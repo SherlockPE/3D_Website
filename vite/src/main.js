@@ -24,12 +24,12 @@ camera.position.z = 5;
 
 // Dodecahedron
 const dod_geometry = new THREE.DodecahedronGeometry();
-const dod_material = new THREE.MeshBasicMaterial({ color: '#f958b4' });
+const dod_material = new THREE.MeshNormalMaterial({ /* color: '#f958b4' */ });
 const dodecahedron = new THREE.Mesh(dod_geometry, dod_material);
 
 // Box
 const box_geometry = new THREE.BoxGeometry(2, 0.1, 2);
-const box_material = new THREE.MeshBasicMaterial({ color: '#6bbef0' });
+const box_material = new THREE.MeshLambertMaterial({ color: '#f958b4' });
 const box = new THREE.Mesh(box_geometry, box_material);
 
 box.position.y = -2;
@@ -41,7 +41,7 @@ scene.add(box);
 // 4. Create a Light
 
 // const light = new THREE.SpotLight('#006769', 1);
-const light = new THREE.SpotLight('#ffffff', 100);
+const light = new THREE.SpotLight('#f0fff0', 50);
 light.position.set(1, 1, 1);
 scene.add(light);
 

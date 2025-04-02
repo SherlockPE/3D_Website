@@ -7,7 +7,7 @@ const canvas = document.getElementById('canvas');
 // 1. Create a scene
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#f3f1f0');
+scene.background = new THREE.Color('#1f1f1f');
 
 // 2. Create a camera
 const camera = new THREE.PerspectiveCamera(
@@ -24,12 +24,12 @@ camera.position.z = 5;
 
 // Dodecahedron
 const dod_geometry = new THREE.DodecahedronGeometry();
-const dod_material = new THREE.MeshNormalMaterial({ /* color: '#f958b4' */ });
+const dod_material = new THREE.MeshLambertMaterial({color: '#f958b4', emissive: '#f958b4', emissiveIntensity: 0.5, roughness: 0.1});
 const dodecahedron = new THREE.Mesh(dod_geometry, dod_material);
 
 // Box
 const box_geometry = new THREE.BoxGeometry(2, 0.1, 2);
-const box_material = new THREE.MeshLambertMaterial({ color: '#f958b4' });
+const box_material = new THREE.MeshStandardMaterial({ color: '#468585', emissive: '#468585', emissiveIntensity: 0.5, roughness: 0.1});
 const box = new THREE.Mesh(box_geometry, box_material);
 
 box.position.y = -2;
@@ -68,13 +68,23 @@ controls.enablePan = true;
 
 function animate() {
   requestAnimationFrame(animate);
-  dodecahedron.rotation.x += 0.01;
-  dodecahedron.rotation.y += 0.01;
+  dodecahedron.rotation.x += 0.03;
+  dodecahedron.rotation.y += 0.05;
 
   // box.rotation.x += 0.01;
-  box.rotation.y += 0.01;
+  box.rotation.y -= 0.01;
   controls.update();
   renderer.render(scene, camera);
 }
+
+// 8. Resize Listener
+window.addEventListener('resize', () => {
+  // Update camera aspect ratio
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+)
+
 
 animate();
